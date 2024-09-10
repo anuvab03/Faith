@@ -14,4 +14,17 @@ Backend: Python (Flask)
 Database: MongoDB
 Machine Learning Framework: Scikit-learn
 Version Control: Git
+
+Usage
+
+Open the application in your browser at http://localhost:5000.
+Input the user profile details or upload a list of user profiles for batch analysis.
+The system will provide a probability score indicating the likelihood of the account being fake.
+
+Future Improvements
+
+Integration with more social media platforms.
+Enhanced model accuracy with additional data features.
+Real-time API support for large-scale detection.
 Webscraper:Apify
+
