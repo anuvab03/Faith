@@ -1,4 +1,4 @@
-profile pic,nums/length username,fullname words,nums/length fullname,name==username,description length,private,posts,followers,follows,fake
+ProfilePic,UsernameLength,FullnameWords,FullnameLength,name==username,DescriptionLength,private,posts,followers,follows,fake
 1,0.27,0,0,0,53,0,32,1000,955,0
 1,0,2,0,0,44,0,286,2740,533,0
 1,0.1,2,0,0,0,1,13,159,98,0
