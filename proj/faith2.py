@@ -87,7 +87,7 @@ def predict():
             return jsonify({"prediction": "Error in data preprocessing"})
         
         # Load the pre-trained SVM model
-        svm_model = joblib.load('C:/Users/anuva/OneDrive/Documents/GitHub/Faith/proj/svm_model.pkl')
+        svm_model = joblib.load('proj/svm_model.pkl')
         
         # Predict whether the Instagram account is fake or not
         prediction = predict_fake_account(svm_model, processed_data)
@@ -112,3 +112,4 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port='5000')
+
