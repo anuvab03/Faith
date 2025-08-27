@@ -3,3 +3,4 @@ scikit-learn
 joblib
 apify-client
 streamlit
+numpy
