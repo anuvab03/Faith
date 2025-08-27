@@ -127,7 +127,7 @@ if check_button:
                     progress_bar.progress(75)
                     
                     try:
-                        svm_model = joblib.load('svm_model.pkl')
+                        svm_model = joblib.load('proj\svm_model.pkl')
                     except FileNotFoundError:
                         st.error("❌ Model file not found. Please ensure 'svm_model.pkl' is in the same directory.")
                         progress_bar.empty()
