@@ -13,7 +13,7 @@ def load_model():
 @st.cache_resource
 def get_apify_client():
     """Initialize Apify client once and cache it"""
-    return ApifyClient("apify_api_iGddTYYzSjCcTHFYv8m0LBcMYZAiLR0bpY1j")
+    return ApifyClient("")
 
 @st.cache_data(ttl=300)  # Cache for 5 minutes to avoid repeated API calls
 def apifyreq(username):
@@ -153,3 +153,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
