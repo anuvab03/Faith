@@ -1,6 +1,5 @@
-pandas
-sklearn
+txtpandas
+scikit-learn
 joblib
 apify-client
 streamlit
-flask
