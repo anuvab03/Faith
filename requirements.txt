@@ -1,4 +1,4 @@
-txtpandas
+pandas
 scikit-learn
 joblib
 apify-client
