@@ -20,7 +20,7 @@ def apifyreq(username):
         # Fetch and return Actor results from the run's dataset (if there are any)
         dataset_id = run["defaultDatasetId"]
         dataset_items = client.dataset(dataset_id).list_items().items
-
+        print(dataset_items)
         return dataset_items
     except Exception as e:
         print(f"Error in apifyreq: {e}")
@@ -35,16 +35,17 @@ def preprocess_data(dataset):
             return None  # Return None if dataset is empty or not a list of dictionaries
 
         data = {
-            'profile pic': dataset.get('profile_pic', 0),
-            'nums/length username': sum(c.isdigit() for c in dataset['username']) / len(dataset['username']) if 'username' in dataset else 0,
-            'fullname words': len(dataset['fullName'].split()) if 'fullName' in dataset else 0,
-            'nums/length fullname': sum(c.isdigit() for c in dataset['fullName']) / len(dataset['fullName']) if 'fullName' in dataset else 0,
+
+            'ProfilePic': dataset.get('profile_pic', 0),
+            'UsernameLength': sum(c.isdigit() for c in dataset['username']) / len(dataset['username']) if 'username' in dataset else 0,
+            'FullnameWords': len(dataset['fullName'].split()) if 'fullName' in dataset else 0,
+            'FullnameLength': sum(c.isdigit() for c in dataset['fullName']) / len(dataset['fullName']) if 'fullName' in dataset else 0,
             'name==username': dataset['fullName'] == dataset['username'] if 'fullName' in dataset and 'username' in dataset else 0,
-            'description length': len(dataset['biography']) if 'biography' in dataset else 0,
+            'DescriptionLength': len(dataset['biography']) if 'biography' in dataset else 0,
             'private': dataset['private'] if 'private' in dataset else 0,
             'posts': dataset['postsCount'] if 'postsCount' in dataset else 0,
-            'followers': dataset['followersCount'] if 'followersCount' in dataset else 0,
-            'follows': dataset['followsCount'] if 'followsCount' in dataset else 0
+            #'followers': dataset['followersCount'] if 'followersCount' in dataset else 0,
+            #'follows': dataset['followsCount'] if 'followsCount' in dataset else 0
         }
         df = pd.DataFrame([data])
         return df
