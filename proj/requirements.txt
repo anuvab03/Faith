@@ -1,0 +1,6 @@
+pandas
+sklearn
+joblib
+apify-client
+streamlit
+flask
