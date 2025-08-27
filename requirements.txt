@@ -1,5 +1,6 @@
-txtpandas
+pandas
 scikit-learn
 joblib
 apify-client
 streamlit
+numpy
