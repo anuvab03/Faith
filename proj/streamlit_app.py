@@ -44,30 +44,25 @@ def apifyreq(username):
 
 
 def preprocess_data(dataset):
-    """Preprocess the dataset for model prediction (aligned with train.csv features)."""
+    """Convert JSON dataset into the right format for prediction"""
     try:
-        # Handle if dataset is list from Apify
         if isinstance(dataset, list) and len(dataset) > 0:
-            dataset = dataset[0]
-        else:
+            dataset = dataset[0]   # some APIs return list
+        elif not isinstance(dataset, dict):
             return None
 
-        username = dataset.get('username', "")
-        fullname = dataset.get('fullName', "")
-        bio = dataset.get('biography', "")
-
-        data = {
-            'UsernameLength': len(username),                         # ✅ number of characters
-            'FullnameWords': len(fullname.split()),                  # ✅ number of words
-            'FullnameLength': len(fullname),                         # ✅ number of characters
-            'name==username': int(fullname == username),             # ✅ 1 if same, else 0
-            'DescriptionLength': len(bio),                           # ✅ length of bio
-            'private': int(dataset.get('private', False)),           # ✅ 1 if private
-            'posts': dataset.get('postsCount', 0),                   # ✅ post count
+        features = {
+            "ProfilePic": 1 if dataset.get("profile_pic") else 0,
+            "UsernameLength": len(dataset.get("username", "")),
+            "FullnameWords": len(dataset.get("fullName", "").split()),
+            "FullnameLength": len(dataset.get("fullName", "")),
+            "name==username": int(dataset.get("fullName", "").lower() == dataset.get("username", "").lower()),
+            "DescriptionLength": len(dataset.get("biography", "")),
+            "private": int(dataset.get("private", False)),
+            "posts": int(dataset.get("postsCount", 0))
         }
 
-        df = pd.DataFrame([data])
-        return df
+        return pd.DataFrame([features])  # ✅ always a DataFrame
 
     except Exception as e:
         print(f"Error in preprocess_data: {e}")
