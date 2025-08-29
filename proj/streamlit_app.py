@@ -16,7 +16,7 @@ def load_model():
 
         
 # Configure page
-st.set_page_config(page_title="FAITH:Instagram Fake Account Detector", page_icon="📷")
+st.set_page_config(page_title="FAITH", page_icon="📷")
 
 def apifyreq(username):
     """Fetch Instagram data using Apify"""
@@ -80,7 +80,7 @@ def predict_fake_account(model, processed_data):
         return None
 
 # Main Streamlit App
-st.title("📷 Instagram Fake Account Detector")
+st.title("📷 FAITH: Instagram Fake Account Detector")
 st.markdown("---")
 
 # Sidebar for information
