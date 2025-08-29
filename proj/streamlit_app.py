@@ -5,14 +5,15 @@ from apify_client import ApifyClient
 import os
 from dotenv import load_dotenv
 
-
 @st.cache_resource
 def load_model():
+    model_path = os.path.join(os.path.dirname(__file__), "svm_model.pkl")
     try:
-        return joblib.load("svm_model.pkl")
+        return joblib.load(model_path)
     except FileNotFoundError:
-        st.error("❌ Model file not found. Please ensure 'svm_model.pkl' is in the same directory.")
+        st.error(f"❌ Model file not found at {model_path}")
         st.stop()
+
         
 # Configure page
 st.set_page_config(page_title="Instagram Fake Account Detector", page_icon="📷")
