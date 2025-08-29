@@ -2,6 +2,10 @@ import streamlit as st
 import joblib
 import pandas as pd
 from apify_client import ApifyClient
+import os
+from dotenv import load_dotenv
+
+
 
 # Configure page
 st.set_page_config(page_title="Instagram Fake Account Detector", page_icon="📷")
@@ -10,7 +14,10 @@ def apifyreq(username):
     """Fetch Instagram data using Apify"""
     try:
         # Initialize the ApifyClient with your API token
-        client = ApifyClient("apify_api_iGddTYYzSjCcTHFYv8m0LBcMYZAiLR0bpY1j")
+        # load .env locally (on your computer)
+        load_dotenv()
+        api_key = os.getenv("API_TOKEN")
+        client = ApifyClient(api_key)
 
         # Prepare the Actor input
         run_input = {"usernames": [username]}
@@ -127,7 +134,7 @@ if check_button:
                     progress_bar.progress(75)
                     
                     try:
-                        svm_model = joblib.load('proj\svm_model.pkl')
+                        svm_model = joblib.load('svm_model.pkl')
                     except FileNotFoundError:
                         st.error("❌ Model file not found. Please ensure 'svm_model.pkl' is in the same directory.")
                         progress_bar.empty()
