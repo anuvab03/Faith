@@ -16,7 +16,7 @@ def load_model():
 
         
 # Configure page
-st.set_page_config(page_title="Instagram Fake Account Detector", page_icon="📷")
+st.set_page_config(page_title="FAITH:Instagram Fake Account Detector", page_icon="📷")
 
 def apifyreq(username):
     """Fetch Instagram data using Apify"""
