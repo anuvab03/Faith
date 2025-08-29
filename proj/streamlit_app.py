@@ -6,7 +6,14 @@ import os
 from dotenv import load_dotenv
 
 
-
+@st.cache_resource
+def load_model():
+    try:
+        return joblib.load("svm_model.pkl")
+    except FileNotFoundError:
+        st.error("❌ Model file not found. Please ensure 'svm_model.pkl' is in the same directory.")
+        st.stop()
+        
 # Configure page
 st.set_page_config(page_title="Instagram Fake Account Detector", page_icon="📷")
 
@@ -23,7 +30,8 @@ def apifyreq(username):
         run_input = {"usernames": [username]}
 
         # Run the Actor and wait for it to finish
-        run = client.actor("dSCLg0C3YEZ83HzYX").call(run_input=run_input)
+        actor = os.getenv("ACTOR")
+        run = client.actor(actor).call(run_input=run_input)
 
         # Fetch and return Actor results from the run's dataset
         dataset_id = run["defaultDatasetId"]
@@ -34,30 +42,37 @@ def apifyreq(username):
         print(f"Error in apifyreq: {e}")
         return None
 
+
 def preprocess_data(dataset):
-    """Preprocess the dataset for model prediction"""
+    """Preprocess the dataset for model prediction (aligned with train.csv features)."""
     try:
-        # Extract relevant information from the dataset
+        # Handle if dataset is list from Apify
         if isinstance(dataset, list) and len(dataset) > 0:
-            dataset = dataset[0]  # Take the first element
+            dataset = dataset[0]
         else:
             return None
 
+        username = dataset.get('username', "")
+        fullname = dataset.get('fullName', "")
+        bio = dataset.get('biography', "")
+
         data = {
-            'ProfilePic': dataset.get('profile_pic', 0),
-            'UsernameLength': sum(c.isdigit() for c in dataset['username']) / len(dataset['username']) if 'username' in dataset else 0,
-            'FullnameWords': len(dataset['fullName'].split()) if 'fullName' in dataset else 0,
-            'FullnameLength': sum(c.isdigit() for c in dataset['fullName']) / len(dataset['fullName']) if 'fullName' in dataset else 0,
-            'name==username': dataset['fullName'] == dataset['username'] if 'fullName' in dataset and 'username' in dataset else 0,
-            'DescriptionLength': len(dataset['biography']) if 'biography' in dataset else 0,
-            'private': dataset['private'] if 'private' in dataset else 0,
-            'posts': dataset['postsCount'] if 'postsCount' in dataset else 0,
+            'UsernameLength': len(username),                         # ✅ number of characters
+            'FullnameWords': len(fullname.split()),                  # ✅ number of words
+            'FullnameLength': len(fullname),                         # ✅ number of characters
+            'name==username': int(fullname == username),             # ✅ 1 if same, else 0
+            'DescriptionLength': len(bio),                           # ✅ length of bio
+            'private': int(dataset.get('private', False)),           # ✅ 1 if private
+            'posts': dataset.get('postsCount', 0),                   # ✅ post count
         }
+
         df = pd.DataFrame([data])
         return df
+
     except Exception as e:
         print(f"Error in preprocess_data: {e}")
         return None
+
 
 def predict_fake_account(model, processed_data):
     """Make prediction using the trained model"""
@@ -129,17 +144,11 @@ if check_button:
                     progress_bar.empty()
                     status_text.empty()
                 else:
-                    # Step 3: Loading model
+                    # Step 3: Loading model (cached)
                     status_text.text("🤖 Loading ML model...")
                     progress_bar.progress(75)
-                    
-                    try:
-                        svm_model = joblib.load('svm_model.pkl')
-                    except FileNotFoundError:
-                        st.error("❌ Model file not found. Please ensure 'svm_model.pkl' is in the same directory.")
-                        progress_bar.empty()
-                        status_text.empty()
-                        st.stop()
+
+                    svm_model = load_model()  # ✅ using cached loader
                     
                     # Step 4: Making prediction
                     status_text.text("🔮 Making prediction...")
@@ -180,10 +189,3 @@ if check_button:
             progress_bar.empty()
             status_text.empty()
             st.error(f"❌ An error occurred: {str(e)}")
-
-# Footer
-st.markdown("---")
-st.markdown(
-    "<div style='text-align: center; color: #666;'>Built with ❤️ using Streamlit and Machine Learning</div>",
-    unsafe_allow_html=True
-)
