@@ -6,6 +6,33 @@ from apify_client import ApifyClient
 import os
 from dotenv import load_dotenv
 
+st.markdown("""
+    <style>
+    .result-card {
+        padding: 15px;
+        border-radius: 8px;
+        margin: 10px 0;
+        font-weight: 500;
+        color: white;
+    }
+    .result-card.fake {
+        background-color: #ff4d4f;  /* Red */
+        border: 1px solid #a8071a;
+    }
+    .result-card.real {
+        background-color: #52c41a;  /* Green */
+        border: 1px solid #237804;
+    }
+    .result-card.error {
+        background-color: #faad14;  /* Amber/Yellow */
+        border: 1px solid #ad6800;
+    }
+    .result-card .icon {
+        margin-right: 8px;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 
 @st.cache_resource
 def load_model():
@@ -152,7 +179,7 @@ if check_button:
                     # Display results
                     if pred is None:
                         st.markdown(
-                            "<div class='result-card fake'>"
+                            "<div class='result-card error'>"
                             "<i class='uil uil-exclamation-octagon icon'></i>"
                             "<strong> Error during prediction</strong><br>"
                             "Something went wrong while analyzing this account."
@@ -177,7 +204,6 @@ if check_button:
                             "</div>",
                             unsafe_allow_html=True,
                         )
-
 
                     with st.expander("<i class='uil uil-chart icon'></i> View Processed Features", expanded=False):
                         st.dataframe(processed)
