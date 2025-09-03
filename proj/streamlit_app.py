@@ -121,7 +121,7 @@ def predict_fake_account(model, processed_data):
         return None
 
 st.set_page_config(
-    page_title="FAITH",
+    page_title="FAITH- Instagram Fake Account Detector",
     page_icon=":camera:",   # placeholder, we’ll inject Instagram below
     layout="wide"
 )
