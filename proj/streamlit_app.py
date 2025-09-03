@@ -121,8 +121,8 @@ def predict_fake_account(model, processed_data):
         return None
 
 st.set_page_config(
-    page_title="FAITH- Instagram Fake Account Detector",
-    page_icon=":camera:",   # placeholder, we’ll inject Instagram below
+    page_title="FAITH",
+    page_icon="https://unicons.iconscout.com/release/v4.0.8/svg/line/instagram.svg",   # placeholder, we’ll inject Instagram below
     layout="wide"
 )
 
@@ -130,7 +130,7 @@ st.set_page_config(
 st.markdown(
     """
     <h1 style='display:flex;align-items:center;gap:10px;'>
-        <i class="uil uil-instagram"></i> FAITH
+        <i class="uil uil-instagram"></i> FAITH - Instagram Fake Account detector
     </h1>
     <hr>
     """,
