@@ -8,6 +8,23 @@ from dotenv import load_dotenv
 
 st.markdown("""
     <style>
+    .sidebar-section {
+        margin: 20px 0;
+    }
+    .sidebar-section h4 {
+        margin-bottom: 10px;
+    }
+    .sidebar-step {
+        display: flex;
+        align-items: center;
+        margin: 8px 0;
+        font-size: 15px;
+    }
+    .sidebar-step i {
+        margin-right: 10px;
+        font-size: 18px;
+        color: #4dabf7;  /* nice blue */
+    }
     .result-card {
         padding: 15px;
         border-radius: 8px;
@@ -107,12 +124,27 @@ st.sidebar.info(
 )
 
 st.sidebar.markdown("### <i class='uil uil-search icon'></i> How it works", unsafe_allow_html=True)
-st.sidebar.markdown("""
-1. <i class='uil uil-user icon'></i> Enter a username  
-2. <i class='uil uil-database icon'></i> Data fetched from API  
-3. <i class='uil uil-robot icon'></i> ML model analysis  
-4. <i class='uil uil-check-circle icon'></i> Output: Real or Fake
-""", unsafe_allow_html=True)
+st.sidebar.markdown(
+    """
+    <div class='sidebar-section'>
+        <h4>How it works</h4>
+        <div class='sidebar-step'>
+            <i class="uil uil-user-circle"></i> Enter a username
+        </div>
+        <div class='sidebar-step'>
+            <i class="uil uil-database"></i> Data fetched from API
+        </div>
+        <div class='sidebar-step'>
+            <i class="uil uil-brain"></i> ML model analysis
+        </div>
+        <div class='sidebar-step'>
+            <i class="uil uil-check-circle"></i> Output: Real or Fake
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Main input
 st.subheader("Enter Instagram Username")
