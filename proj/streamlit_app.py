@@ -8,6 +8,9 @@ from dotenv import load_dotenv
 
 st.markdown("""
     <link href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" rel="stylesheet">
+    <link href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" rel="stylesheet">
+    <link rel="icon" href="https://unicons.iconscout.com/release/v4.0.8/svg/line/instagram.svg" type="image/svg+xml">
+
 """, unsafe_allow_html=True)
 
 
@@ -117,9 +120,23 @@ def predict_fake_account(model, processed_data):
         print(f"Error in predict_fake_account: {e}")
         return None
 
+st.set_page_config(
+    page_title="FAITH",
+    page_icon=":camera:",   # placeholder, we’ll inject Instagram below
+    layout="wide"
+)
+
 # Main Streamlit App
-st.title("📷 Instagram Fake Account Detector")
-st.markdown("---")
+st.markdown(
+    """
+    <h1 style='display:flex;align-items:center;gap:10px;'>
+        <i class="uil uil-instagram"></i> FAITH
+    </h1>
+    <hr>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Sidebar
 st.sidebar.markdown("### <i class='uil uil-info-circle icon'></i> About", unsafe_allow_html=True)
