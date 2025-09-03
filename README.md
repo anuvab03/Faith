@@ -1,30 +1,58 @@
-# Faith
-Fake Account Detector
-Overview
-Faith is a web application designed to detect fake accounts on social media platforms. This tool uses machine learning algorithms to analyze user profiles and identify potential fraudulent activity. With the rise of fake profiles used for misinformation, scams, and other malicious purposes, Faith helps users and platforms ensure the authenticity of user accounts.
+# FAITH – Fake Account Detector  
 
-Features
-Profile Analysis: Faith reviews user data such as profile completeness, activity patterns, and engagement behavior to determine legitimacy.
-Machine Learning Models: Employs advanced machine learning algorithms to assess and classify accounts as real or fake.
-User-friendly Interface: A simple and intuitive interface for easy interaction and profile checking.
-Real-time Detection: Provides quick analysis results for each user profile.
-Technology Stack
-Frontend: HTML, CSS, JavaScript
-Backend: Python (Flask)
-Database: MongoDB
-Machine Learning Framework: Scikit-learn
-Version Control: Git
+FAITH is a web application designed to detect fake accounts on social media platforms.  
+This tool uses machine learning algorithms to analyze user profiles and identify potential fraudulent activity.  
+With the rise of fake profiles used for misinformation, scams, and other malicious purposes, FAITH helps users and platforms ensure the authenticity of user accounts.
 
-Usage
+---
 
-Open the application in your browser at http://localhost:5000.
-Input the user profile details or upload a list of user profiles for batch analysis.
-The system will provide a probability score indicating the likelihood of the account being fake.
+## 🚀 Live Demo  
+👉 [Try FAITH Live](https://faith-detector.streamlit.app/)  
 
-Future Improvements
+---
 
-Integration with more social media platforms.
-Enhanced model accuracy with additional data features.
-Real-time API support for large-scale detection.
-Webscraper:Apify
+## 📸 Screenshots  
 
+### Homepage  
+![Homepage Screenshot](assets/homepage.png)  
+
+### Prediction Example  
+![Prediction Screenshot](assets/prediction.png)  
+
+*(Place your screenshots inside an `assets/` folder in the repo and adjust the paths if needed.)*
+
+---
+
+## ✨ Features  
+- **Profile Analysis**: Reviews user data such as profile completeness, activity patterns, and engagement behavior.  
+- **Machine Learning Models**: Employs advanced ML algorithms to classify accounts as real or fake.  
+- **User-friendly Interface**: A simple and intuitive interface for easy interaction and profile checking.  
+- **Real-time Detection**: Provides instant analysis results for each user profile.  
+
+---
+
+## 🛠️ Technology Stack  
+- **Frontend**: Streamlit (with custom CSS, Unicons)  
+- **Backend**: Python (scikit-learn, pandas, joblib)  
+- **Database**: MongoDB (future extension)  
+- **Webscraper**: Apify  
+- **Version Control**: Git & GitHub  
+
+---
+
+## ⚡ Usage  
+
+1. Open the live app at: [https://faith-detector.streamlit.app/](https://faith-detector.streamlit.app/)  
+   *(or run locally with `streamlit run proj/streamlit_app.py`)*  
+2. Enter an Instagram username (without @).  
+3. The system fetches profile data.  
+4. The ML model analyzes features and predicts **Real** or **Fake**.  
+
+---
+
+## 🔮 Future Improvements  
+- Integration with more social media platforms.  
+- Enhanced model accuracy with additional features.  
+- Real-time API support for large-scale detection.  
+
+---
