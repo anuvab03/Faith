@@ -14,10 +14,10 @@ With the rise of fake profiles used for misinformation, scams, and other malicio
 ## 📸 Screenshots  
 
 ### Homepage  
-![Homepage Screenshot](assets/homepage.png)  
+![Homepage Screenshot](homepage.png)  
 
 ### Prediction Example  
-![Prediction Screenshot](assets/prediction.png)  
+![Prediction Screenshot](prediction.png)  
 
 *(Place your screenshots inside an `assets/` folder in the repo and adjust the paths if needed.)*
 
