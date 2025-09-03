@@ -7,6 +7,11 @@ import os
 from dotenv import load_dotenv
 
 st.markdown("""
+    <link href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+
+st.markdown("""
     <style>
     .sidebar-section {
         margin: 20px 0;
