@@ -6,52 +6,19 @@ from apify_client import ApifyClient
 import os
 from dotenv import load_dotenv
 
-# -------------------------------
-# Page & Styling
-# -------------------------------
-st.set_page_config(page_title="Instagram Fake Account Detector", page_icon="📷")
 
-# Load Unicons (same as your dashboard)
-st.markdown("""
-<style>
-.result-card {
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    margin-top: 10px;
-}
-.result-card.fake {
-    background-color: #e53935; /* solid red */
-    color: white;
-}
-.result-card.real {
-    background-color: #2ecc71; /* solid green */
-    color: white;
-}
-.result-card .icon {
-    margin-right: 8px;
-    font-size: 20px;
-    vertical-align: middle;
-}
-</style>
-""", unsafe_allow_html=True)
-
-
-# -------------------------------
-# Model Loader
-# -------------------------------
 @st.cache_resource
 def load_model():
+    model_path = os.path.join(os.path.dirname(__file__), "svm_model.pkl")
     try:
-        return joblib.load("svm_model.pkl")
+        return joblib.load(model_path)
     except FileNotFoundError:
-        st.error("❌ Model file not found. Please ensure 'svm_model.pkl' is in the same directory.")
+        st.error(f"❌ Model file not found at {model_path}")
         st.stop()
+        
+# Configure page
+st.set_page_config(page_title="Instagram Fake Account Detector", page_icon="📷")
 
-# -------------------------------
-# API Client
-# -------------------------------
 def apifyreq(username):
     try:
         load_dotenv()
@@ -101,9 +68,7 @@ def predict_fake_account(model, processed_data):
         print(f"Error in predict_fake_account: {e}")
         return None
 
-# -------------------------------
-# App Layout
-# -------------------------------
+# Main Streamlit App
 st.title("📷 Instagram Fake Account Detector")
 st.markdown("---")
 
